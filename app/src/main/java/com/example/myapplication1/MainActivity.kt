@@ -25,9 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        userAPI=RemoteSource.getRemoteInstance().create(UserAPI::class.java)
-        userDao=UserDatabase.getInstance(applicationContext).userDao()
-        userRepo= UserRepo(userAPI,userDao,this)
+
+        userRepo= (application as MyApplication).userRepo
         userViewModel= ViewModelProvider(this,UserViewModelFactory(userRepo)).get(UserViewModel::class.java)
 
         userViewModel.userDetails.observe(this, Observer {
