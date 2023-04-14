@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="quote"
+            type="com.example.myapplication1.mvvm.repo.Quote" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/card_bg"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="wrap_content"
+            android:text="@{quote.text}"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:text="@{quote.author}"
+
+            android:layout_margin="20dp"
+            android:textSize="30dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</layout>
