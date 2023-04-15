@@ -7,6 +7,8 @@
     tools:context=".mvp.view.MVPExample">
 
     <TextView
+
+        android:id="@+id/tvValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -14,6 +16,7 @@
         android:layout_margin="30dp"/>
 
     <Button
+        android:id="@+id/btnValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
