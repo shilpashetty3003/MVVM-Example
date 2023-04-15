@@ -25,7 +25,7 @@ class UserViewModel(var userRepo: UserRepo) : ViewModel() {
     }
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO){
             userRepo.getUserDetails()
         }
     }
