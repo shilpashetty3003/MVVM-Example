@@ -11,35 +11,54 @@ import com.example.myapplication1.mvvm_retrofit_room.db.UserDao
 import com.example.myapplication1.mvvm_retrofit_room.model.Users
 import com.example.myapplication1.mvvm_retrofit_room.model.UsersItem
 import com.example.myapplication1.mvvm_retrofit_room.network.UserAPI
+import com.example.myapplication1.mvvm_retrofit_room.utils.Resource
 import retrofit2.Response
 
 
-class UserRepo(var userAPI:UserAPI,var userDao: UserDao,var contexts: Context) {
+class UserRepo(var userAPI: UserAPI, var userDao: UserDao, var contexts: Context) {
 
-   public var  apiResult=MutableLiveData<List<UsersItem>>()
+    public var apiResult = MutableLiveData<Resource<List<UsersItem>>>()
 
-    suspend fun insertData(usersItem: List<UsersItem>){
+    suspend fun insertData(usersItem: List<UsersItem>) {
         userDao.insertUser(usersItem)
 
     }
 
-    suspend fun getUserDetails(){
+    suspend fun getUserDetails() {
 
-        if(isOnline(contexts)){
-            var result=userAPI.getUsers()
-            Log.d("TAG", "getUserDetails: "+result.body())
-            if(result!=null){
+        if (isOnline(contexts)) {
+            apiResult.postValue(Resource.Loading())
+            var result = userAPI.getUsers()
+            Log.d("TAG", "getUserDetails: " + result.body())
+            try {
+
                 result.body()?.let { userDao.insertUser(it) }
+                apiResult.postValue(Resource.Success(result.body()))
 
-                apiResult.postValue(result.body())
+                //apiResult.postValue(Resource.Success(result.body()))
 
-                Log.d("TAG", "getUserDetails: "+apiResult.value)
+                Log.d("TAG", "getUserDetails: " + apiResult.value)
+
+            } catch (error: Error) {
+
+                apiResult.postValue(Resource.Failure("Error"))
+
             }
-        }
-        else{
-           apiResult.postValue(userDao.getUsers())
+
+        } else {
+            apiResult.postValue(Resource.Success(userDao.getUsers()))
+
         }
     }
+
+    suspend fun getDataInBackground() {
+        var random = (Math.random() * 10)
+        var result = userAPI.getUsers()
+        if (result != null) {
+            result.body()?.let { userDao.insertUser(it) }
+        }
+    }
+
     @SuppressLint("ServiceCast")
     fun isOnline(context: Context): Boolean {
         val connectivityManager =

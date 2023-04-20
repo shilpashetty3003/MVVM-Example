@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MyApplication1"
         tools:targetApi="31">
         <activity
-            android:name=".mvp_example.view.MVP_New"
+            android:name=".Flows.FlowsExample"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,16 +25,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvp.view.MVPExample"
+            android:name=".rxjava.RxJavaExample"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".mvvm.views.MvvmActivity"
+            android:name=".workmanager.WorkManagerExample"
             android:exported="true"></activity>
         <activity
+            android:name=".coroutines.ui.retriofit.singlenetwork.SingleNetwork"
+            android:exported="true" />
+        <activity
+            android:name=".coroutines.NextActivity"
+            android:exported="false" />
+        <activity
+            android:name=".coroutines.CoroutineExample"
+            android:exported="true" />
+        <activity
+            android:name=".mvp_example.view.MVP_New"
+            android:exported="true" />
+        <activity
+            android:name=".mvp.view.MVPExample"
+            android:exported="true" />
+        <activity
+            android:name=".mvvm.views.MvvmActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

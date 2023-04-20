@@ -20,6 +20,7 @@ import com.example.myapplication1.mvvm_retrofit_room.model.UsersItem
 
 class MVP_New : AppCompatActivity(),NewsContractor.View {
 
+
     var newsPresenter:NewsPresenter ? =null
     lateinit var mvpNewBinding: ActivityMvpNewBinding
     lateinit var newsAdapter:NewAdapter

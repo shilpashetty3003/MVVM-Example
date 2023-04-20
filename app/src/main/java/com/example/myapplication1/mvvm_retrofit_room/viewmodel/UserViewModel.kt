@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication1.mvvm_retrofit_room.model.Users
 import com.example.myapplication1.mvvm_retrofit_room.model.UsersItem
 import com.example.myapplication1.mvvm_retrofit_room.repository.UserRepo
+import com.example.myapplication1.mvvm_retrofit_room.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,7 +16,7 @@ class UserViewModel(var userRepo: UserRepo) : ViewModel() {
 
     //var userDetails_ = MutableLiveData<List<UsersItem>>()
 
-    val userDetails: LiveData<List<UsersItem>>
+    val userDetails: LiveData<Resource<List<UsersItem>>>
         get() = userRepo.apiResult
 
     fun insertUser(userList: List<UsersItem>) {

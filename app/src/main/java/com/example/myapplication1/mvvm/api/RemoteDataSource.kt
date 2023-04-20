@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RemoteDataSource {
 
-    var BASE_URL="https://api.quotable.io/"
+    var BASE_URL="https://api.quotable.io"
 
     fun getInstsnce(): Retrofit{
         return Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()

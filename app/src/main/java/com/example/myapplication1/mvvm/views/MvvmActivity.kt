@@ -23,6 +23,7 @@ import com.example.myapplication1.mvvm.repo.QuoteRepo
 import com.example.myapplication1.mvvm.viewmodel.QuoteViewModel
 import com.example.myapplication1.mvvm.viewmodel.QuoteViewModelFactory
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class MvvmActivity : AppCompatActivity() {
@@ -36,13 +37,15 @@ class MvvmActivity : AppCompatActivity() {
 
         var quoteApi = RemoteDataSource.getInstsnce().create(QuoteApi::class.java)
 
-//        GlobalScope.launch {
-//
-//            var result = quoteApi.getQuotes(1)
-//            Log.d("TAG", "onCreateresult: " + result.body())
-//        }
+        Log.d("TAG", "onCreatequoteApi: "+quoteApi)
 
+        GlobalScope.launch {
 
+            Log.d("TAG", "backgriundTghres: "+Thread.currentThread().name)
+
+            var result = quoteApi.getQuotes(1)
+            Log.d("TAG", "onCreateresult: " + result.body())
+        }
 
         val quoteDao = QuoteDatabase.getInstance(applicationContext).quoteDao()
         val quoteRepo = QuoteRepo(quoteDao,quoteApi)
@@ -50,6 +53,8 @@ class MvvmActivity : AppCompatActivity() {
             this,
             QuoteViewModelFactory(quoteRepo)
         ).get(QuoteViewModel::class.java)
+
+
 
         val rvQuote = findViewById<RecyclerView>(R.id.rvQuote)
         rvQuote.layoutManager = LinearLayoutManager(this)
